@@ -1,0 +1,60 @@
+#数据表配置
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: 123456
+    url: jdbc:mysql://127.0.0.1:3306/rwlmall?useSSL=false
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+
+  jackson:
+    serialization:
+      fail-on-empty-beans: false
+      indent-output: true
+  redis:
+      database: 0
+      host: 127.0.0.1
+      password:
+      port: 6379
+
+
+
+
+#服务器配置
+server:
+  port: 8080
+  servlet:
+    context-path: /rwlmall
+
+#微信配置
+wechat:
+  appId: wx3c6699da59f7cb25
+  appSecret: 283696ca1e6fc9ef739b1b74cea6b3ce
+  mchId: 10024153
+  mchKey: braggadocio345l6ackadaisicalness
+  keyPath: T:\Java\SrpingProject\rwlmall/src/main/resources/static/h5.p12
+  notifyUrl: http://rtest.rwlai.cn/rwlmall/rwlmall/pay/notify
+
+
+#微信认证url配置
+redirecturl: http://rtest.rwlai.cn/rwlmall/rwlmall/wechat/userinfo
+authurl: http://rtest.rwlai.cn/rwlmall/rwlmall/wechat/login
+
+
+## yml配置日志输出的格式以及日志文件
+#logging:
+#  file: T:\Java\log\rwlmall\rwlmall.log
+#  path: T:\Java\log\rwlmall
+#  pattern:
+## %d = 日期  %msg = 消息  %n = 换行    只是修改控制台输出格式
+#  console: "%d - %msg%n"
+
+
+
+#图片路径配置
+imagepath: U:\images\
+imageurl: http://127.0.0.1/rwlmall/images/
+excelpath: U:\excel\
