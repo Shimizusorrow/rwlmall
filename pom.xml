@@ -222,12 +222,11 @@
         </dependency>
 
 
-
         <!--sql server-->
         <!--<dependency>-->
-            <!--<groupId>com.microsoft.sqlserver</groupId>-->
-            <!--<artifactId>sqljdbc4</artifactId>-->
-            <!--<version>4.0</version>-->
+        <!--<groupId>com.microsoft.sqlserver</groupId>-->
+        <!--<artifactId>sqljdbc4</artifactId>-->
+        <!--<version>4.0</version>-->
         <!--</dependency>-->
 
         <!--日志-->
@@ -259,15 +258,12 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-
-                <!--<configuration>-->
-                <!--<fork>false</fork>-->
-                <!--</configuration>-->
-		<!--<configuration>-->
-                    <!--<jvmArguments>-->
-                         <!-- -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5005-->
-                    <!--</jvmArguments>-->
-                <!--</configuration>-->
+                <configuration>
+                    <jvmArguments>
+                        -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5005
+                    </jvmArguments>
+                    <fork>false</fork>
+                </configuration>
             </plugin>
         </plugins>
     </build>

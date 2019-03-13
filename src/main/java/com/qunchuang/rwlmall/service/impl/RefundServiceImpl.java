@@ -1,5 +1,6 @@
 package com.qunchuang.rwlmall.service.impl;
 
+import com.qunchuang.rwlmall.bean.UserRecord;
 import com.qunchuang.rwlmall.domain.*;
 import com.qunchuang.rwlmall.enums.ResultExceptionEnum;
 import com.qunchuang.rwlmall.enums.UserRecordEnum;
@@ -8,9 +9,11 @@ import com.qunchuang.rwlmall.repository.RefundRepository;
 import com.qunchuang.rwlmall.service.RedisService;
 import com.qunchuang.rwlmall.service.RefundService;
 import com.qunchuang.rwlmall.service.UserService;
+import com.qunchuang.rwlmall.utils.WeChatUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -60,6 +63,7 @@ public class RefundServiceImpl implements RefundService {
 
         userService.save(user);
 
+        WeChatUtil.sendMessage(redisService.getToken(), user.getOpenid(), "财务退款", "", refund.getMoney(), "", System.currentTimeMillis());
 
 
         return refundRepository.save(refund);

@@ -6,11 +6,13 @@ import com.qunchuang.rwlmall.enums.*;
 import com.qunchuang.rwlmall.service.*;
 import com.qunchuang.rwlmall.utils.DateUtil;
 import com.qunchuang.rwlmall.utils.SpringUtil;
+import com.qunchuang.rwlmall.utils.WeChatUtil;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author Curtain
@@ -169,6 +171,17 @@ public class TimeSchedule {
         furnitureOrders.forEach(furnitureOrder -> furnitureOrderService.cancel(furnitureOrder.getId()));
     }
 
+    //每隔90分钟更新一下token
+    @Scheduled(fixedRate = 1000 * 60 * 59)
+    public void cacheWeChatToken() {
 
+        RedisTemplate redisTemplate = (RedisTemplate) SpringUtil.getBean("redisTemplate");
+        WeChatAccountConfig weChatAccountConfig = (WeChatAccountConfig) SpringUtil.getBean("weChatAccountConfig");
+
+        String token = WeChatUtil.getToken(weChatAccountConfig.getAppId(), weChatAccountConfig.getAppSecret());
+
+        redisTemplate.opsForValue().set("weChatToken", token);
+
+    }
 
 }

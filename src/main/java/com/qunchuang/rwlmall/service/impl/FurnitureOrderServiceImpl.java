@@ -1,11 +1,16 @@
 package com.qunchuang.rwlmall.service.impl;
 
+import com.qunchuang.rwlmall.bean.UserRecord;
 import com.qunchuang.rwlmall.domain.*;
 import com.qunchuang.rwlmall.enums.*;
 import com.qunchuang.rwlmall.exception.RwlMallException;
 import com.qunchuang.rwlmall.repository.FurnitureOrderRepository;
 import com.qunchuang.rwlmall.service.*;
+import com.qunchuang.rwlmall.utils.BeanCopyUtil;
 import com.qunchuang.rwlmall.utils.DateUtil;
+import com.qunchuang.rwlmall.utils.JiGuangMessagePushUtil;
+import com.qunchuang.rwlmall.utils.WeChatUtil;
+import org.hibernate.StaleObjectStateException;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -14,6 +19,7 @@ import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import sun.reflect.generics.repository.ConstructorRepository;
 
 import java.security.Principal;
 import java.util.*;
@@ -178,6 +184,8 @@ public class FurnitureOrderServiceImpl extends OrderServiceImpl<FurnitureOrder> 
                     furnitureOrder.setStatus(MallAndFurnitureOrderStatusEnum.DELIVERY.getCode());
                     furnitureOrder.setStatusUpdateTime(furnitureOrder.getStatusUpdateTime() + "," + DateUtil.currentTime());
                     furnitureOrderRepository.save(furnitureOrder);
+                    JiGuangMessagePushUtil.sendMessage(store.getNumber(), JiGuangMessagePushUtil.CONTENT);
+                    WeChatUtil.sendMessage(redisService.getToken(), furnitureOrder.getOpenid(), "小让家居", furnitureOrder.getNumber(), furnitureOrder.getAmount(), "宝贝送还中请当面查验", furnitureOrder.getCreatetime());
 
                 } else {
                     throw new AccessDeniedException("权限不足");
@@ -197,6 +205,8 @@ public class FurnitureOrderServiceImpl extends OrderServiceImpl<FurnitureOrder> 
                 furnitureOrder.setStatusUpdateTime(furnitureOrder.getStatusUpdateTime() + "," + DateUtil.currentTime());
 
                 furnitureOrderRepository.save(furnitureOrder);
+                JiGuangMessagePushUtil.sendMessage(store.getNumber(), JiGuangMessagePushUtil.CONTENT);
+                WeChatUtil.sendMessage(redisService.getToken(), furnitureOrder.getOpenid(), "小让家居", furnitureOrder.getNumber(), furnitureOrder.getAmount(), "订单已分派请耐心等待", furnitureOrder.getCreatetime());
             } else {
                 throw new AccessDeniedException("权限不足");
             }
@@ -433,6 +443,7 @@ public class FurnitureOrderServiceImpl extends OrderServiceImpl<FurnitureOrder> 
                 userService.save(user);
 
                 furnitureOrder.setPayStatus(PayStatusEnum.REFUND.getCode());
+                WeChatUtil.sendMessage(redisService.getToken(), furnitureOrder.getOpenid(), "小让家居", furnitureOrder.getNumber(), furnitureOrder.getAmount(), "已取消，订单金额已转入余额", furnitureOrder.getCreatetime());
 
             }
 

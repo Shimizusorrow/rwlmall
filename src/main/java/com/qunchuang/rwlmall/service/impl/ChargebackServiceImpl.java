@@ -5,9 +5,11 @@ import com.qunchuang.rwlmall.enums.ResultExceptionEnum;
 import com.qunchuang.rwlmall.enums.UserRecordEnum;
 import com.qunchuang.rwlmall.exception.RwlMallException;
 import com.qunchuang.rwlmall.repository.ChargebackRepository;
+import com.qunchuang.rwlmall.repository.RefundRepository;
 import com.qunchuang.rwlmall.service.ChargebackService;
 import com.qunchuang.rwlmall.service.RedisService;
 import com.qunchuang.rwlmall.service.UserService;
+import com.qunchuang.rwlmall.utils.WeChatUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -64,6 +66,7 @@ public class ChargebackServiceImpl implements ChargebackService {
 
         userService.save(user);
 
+        WeChatUtil.sendMessage(redisService.getToken(), user.getOpenid(), "财务扣款", "", chargeback.getMoney(), "", System.currentTimeMillis());
 
 
         return chargebackRepository.save(chargeback);

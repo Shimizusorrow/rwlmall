@@ -1,6 +1,7 @@
 package com.qunchuang.rwlmall.service.impl;
 
 import com.qunchuang.rwlmall.bean.FreightSet;
+import com.qunchuang.rwlmall.bean.UserRecord;
 import com.qunchuang.rwlmall.domain.*;
 import com.qunchuang.rwlmall.enums.*;
 import com.qunchuang.rwlmall.exception.RwlMallException;
@@ -9,17 +10,25 @@ import com.qunchuang.rwlmall.repository.LaundryOrderRepository;
 import com.qunchuang.rwlmall.service.*;
 import com.qunchuang.rwlmall.utils.BeanCopyUtil;
 import com.qunchuang.rwlmall.utils.DateUtil;
+import com.qunchuang.rwlmall.utils.JiGuangMessagePushUtil;
+import com.qunchuang.rwlmall.utils.WeChatUtil;
+import org.hibernate.StaleObjectStateException;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.print.attribute.standard.PrinterName;
 import java.security.Principal;
 import java.util.*;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 /**
  * @author Curtain
@@ -191,6 +200,7 @@ public class LaundryOrderServiceImpl extends OrderServiceImpl<LaundryOrder> impl
                     order.setStoreId(storeId);
                     order.setReceiptPeople(store.getName());
                     delivery(order);
+                    JiGuangMessagePushUtil.sendMessage(store.getNumber(), JiGuangMessagePushUtil.CONTENT);
                 } else {
                     throw new AccessDeniedException("权限不足");
                 }
@@ -205,6 +215,7 @@ public class LaundryOrderServiceImpl extends OrderServiceImpl<LaundryOrder> impl
                 order.setServiceStore(agent.getAgentName());
                 order.setAgentId(agent.getId());
                 delivery(order);
+                JiGuangMessagePushUtil.sendMessage(store.getNumber(), JiGuangMessagePushUtil.CONTENT);
             } else {
                 throw new AccessDeniedException("权限不足");
             }
@@ -293,6 +304,7 @@ public class LaundryOrderServiceImpl extends OrderServiceImpl<LaundryOrder> impl
         laundryOrderRepository.save(laundryOrder);
 
 
+        WeChatUtil.sendMessage(redisService.getToken(), laundryOrder.getOpenid(), "小让洗护", laundryOrder.getNumber(), laundryOrder.getAmount(), "宝贝送还中请当面查验", laundryOrder.getCreatetime());
 
     }
 
@@ -306,6 +318,7 @@ public class LaundryOrderServiceImpl extends OrderServiceImpl<LaundryOrder> impl
         laundryOrder.setStatusUpdateTime(laundryOrder.getStatusUpdateTime() + "," + DateUtil.currentTime());
         laundryOrderRepository.save(laundryOrder);
 
+        WeChatUtil.sendMessage(redisService.getToken(), laundryOrder.getOpenid(), "小让洗护", laundryOrder.getNumber(), laundryOrder.getAmount(), "订单已分派请耐心等待", laundryOrder.getCreatetime());
     }
 
     @Override
@@ -401,6 +414,7 @@ public class LaundryOrderServiceImpl extends OrderServiceImpl<LaundryOrder> impl
                 userService.save(user);
                 laundryOrder.setPayStatus(PayStatusEnum.REFUND.getCode());
 
+                WeChatUtil.sendMessage(redisService.getToken(), laundryOrder.getOpenid(), "小让洗护", laundryOrder.getNumber(), laundryOrder.getAmount(), "已取消，订单金额已转入余额", laundryOrder.getCreatetime());
 
             }
 
@@ -596,6 +610,7 @@ public class LaundryOrderServiceImpl extends OrderServiceImpl<LaundryOrder> impl
         laundryOrder.setStatusUpdateTime(laundryOrder.getStatusUpdateTime() + "," + DateUtil.currentTime());
         LaundryOrder order = laundryOrderRepository.save(laundryOrder);
 
+        WeChatUtil.sendMessage(redisService.getToken(), laundryOrder.getOpenid(), "小让洗护", laundryOrder.getNumber(), laundryOrder.getAmount(), "订单处理中", laundryOrder.getCreatetime());
 
         return order;
     }

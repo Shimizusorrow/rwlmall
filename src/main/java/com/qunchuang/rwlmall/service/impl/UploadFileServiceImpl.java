@@ -24,6 +24,9 @@ public class UploadFileServiceImpl implements UploadFileService {
     @Value("${imageurl}")
     String returnurl;
 
+    @Value("$qiniuimageurl")
+    String qiniuimageurl;
+
 
     @Override
     public String uploadImage(MultipartFile image) {

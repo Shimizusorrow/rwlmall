@@ -1,15 +1,20 @@
 package com.qunchuang.rwlmall.service.impl;
 
 import com.qunchuang.rwlmall.bean.FreightSet;
+import com.qunchuang.rwlmall.bean.UserRecord;
 import com.qunchuang.rwlmall.domain.*;
 import com.qunchuang.rwlmall.enums.*;
 import com.qunchuang.rwlmall.exception.RwlMallException;
 import com.qunchuang.rwlmall.repository.MallOrderRepository;
 import com.qunchuang.rwlmall.service.*;
 import com.qunchuang.rwlmall.utils.DateUtil;
+import com.qunchuang.rwlmall.utils.JiGuangMessagePushUtil;
+import com.qunchuang.rwlmall.utils.WeChatUtil;
+import org.hibernate.StaleObjectStateException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
@@ -123,6 +128,8 @@ public class MallOrderServiceImpl extends OrderServiceImpl<MallOrder> implements
                     mallOrder.setReceiptPeople(store.getName());
                     mallOrderRepository.save(mallOrder);
 
+                    JiGuangMessagePushUtil.sendMessage(store.getNumber(), JiGuangMessagePushUtil.CONTENT);
+                    WeChatUtil.sendMessage(redisService.getToken(), mallOrder.getOpenid(), "小让商城", mallOrder.getNumber(), mallOrder.getAmount(), "订单已分派请耐心等待", mallOrder.getCreatetime());
 
                 } else {
                     throw new AccessDeniedException("权限不足");
@@ -138,6 +145,8 @@ public class MallOrderServiceImpl extends OrderServiceImpl<MallOrder> implements
                 mallOrder.setStatus(MallAndFurnitureOrderStatusEnum.DELIVERY.getCode());
                 mallOrder.setStatusUpdateTime(mallOrder.getStatusUpdateTime() + "," + DateUtil.currentTime());
                 mallOrderRepository.save(mallOrder);
+                JiGuangMessagePushUtil.sendMessage(store.getNumber(), JiGuangMessagePushUtil.CONTENT);
+                WeChatUtil.sendMessage(redisService.getToken(), mallOrder.getOpenid(), "小让商城", mallOrder.getNumber(), mallOrder.getAmount(), "订单已分派请耐心等待", mallOrder.getCreatetime());
             } else {
                 throw new AccessDeniedException("权限不足");
             }
@@ -391,6 +400,7 @@ public class MallOrderServiceImpl extends OrderServiceImpl<MallOrder> implements
                 userService.save(user);
 
                 mallOrder.setPayStatus(PayStatusEnum.REFUND.getCode());
+                WeChatUtil.sendMessage(redisService.getToken(), mallOrder.getOpenid(), "小让商城", mallOrder.getNumber(), mallOrder.getAmount(), "已取消，订单金额已转入余额", mallOrder.getCreatetime());
 
             }
 

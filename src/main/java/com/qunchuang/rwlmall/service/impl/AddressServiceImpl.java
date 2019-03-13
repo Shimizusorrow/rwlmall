@@ -7,6 +7,7 @@ import com.qunchuang.rwlmall.exception.RwlMallException;
 import com.qunchuang.rwlmall.repository.AddressRepository;
 import com.qunchuang.rwlmall.service.AddressService;
 import com.qunchuang.rwlmall.utils.BeanCopyUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -22,6 +23,7 @@ import java.util.Optional;
  */
 
 @Service
+@Slf4j
 public class AddressServiceImpl implements AddressService {
 
     @Autowired
@@ -31,6 +33,7 @@ public class AddressServiceImpl implements AddressService {
     public Address findOne(String addressId) {
         Optional<Address> optional = addressRepository.findById(Optional.ofNullable(addressId).orElse(""));
         if (!optional.isPresent()) {
+            log.error("查找地址不存在 addressId = {}",addressId);
             throw new RwlMallException(ResultExceptionEnum.ADDRESS_NOT_EXIST);
         }
         return optional.get();
@@ -44,6 +47,7 @@ public class AddressServiceImpl implements AddressService {
                 return address;
             }
         }
+        log.error("获取用户默认地址失败，用户无默认地址 userId = {}",userId);
         throw new RwlMallException(ResultExceptionEnum.ADDRESS_NOT_EXIST);
     }
 
@@ -97,6 +101,7 @@ public class AddressServiceImpl implements AddressService {
     @Override
     public void save(String userId, Address address) {
         if (!Optional.ofNullable(address).isPresent()) {
+            log.error("保存用户收货地址，address = {},userId = {}",address,userId);
             throw new RwlMallException(ResultExceptionEnum.ADDRESS_NOT_EXIST);
         }
         address.setUserId(userId);

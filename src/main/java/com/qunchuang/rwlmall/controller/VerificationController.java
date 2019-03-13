@@ -19,7 +19,7 @@ public class VerificationController {
     @PostMapping("/getcode")
     public Object getCode(@RequestParam("phonenumber") String phoneNumber, Principal principal) {
         try {
-            return verificationService.getCode(phoneNumber, principal.getName());
+            verificationService.getCode(phoneNumber, principal.getName());
         } catch (ClientException e) {
             e.printStackTrace();
         }

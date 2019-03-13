@@ -15,12 +15,28 @@ spring:
       fail-on-empty-beans: false
       indent-output: true
   redis:
-      database: 0
-      host: 127.0.0.1
-      password:
-      port: 6379
+    database: 0
+    host: 127.0.0.1
+    password:
+    port: 6379
+
+#  # MULTIPART
+#  http:
+#    multipart:
+#      location: ${user.dir}/multipartUpload
 
 
+
+# sql server
+#  datasource:
+#    url: jdbc:sqlserver://lovslhody:1433;DatabaseName=DB
+#    username: username
+#    password: password
+#    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+#  jpa:
+#    properties:
+#      hibernate:
+#        default_schema: schema
 
 
 #服务器配置
@@ -44,17 +60,24 @@ redirecturl: http://rtest.rwlai.cn/rwlmall/rwlmall/wechat/userinfo
 authurl: http://rtest.rwlai.cn/rwlmall/rwlmall/wechat/login
 
 
-## yml配置日志输出的格式以及日志文件
-#logging:
-#  file: T:\Java\log\rwlmall\rwlmall.log
-#  path: T:\Java\log\rwlmall
-#  pattern:
-## %d = 日期  %msg = 消息  %n = 换行    只是修改控制台输出格式
-#  console: "%d - %msg%n"
+  ## yml配置日志输出的格式以及日志文件
+  #logging:
+  #  file: T:\Java\log\rwlmall\rwlmall.log
+  #  path: T:\Java\log\rwlmall
+  #  pattern:
+  ## %d = 日期  %msg = 消息  %n = 换行    只是修改控制台输出格式
+  #  console: "%d - %msg%n"
+
 
 
 
 #图片路径配置
+qiniuimageurl: https://rtest.rwlai.com/
 imagepath: U:\images\
 imageurl: http://127.0.0.1/rwlmall/images/
 excelpath: U:\excel\
+
+#云测Testin短信服务
+account: rangwolai
+password: Rangwolai1
+sendurl: http://118.178.189.133/msg/

@@ -18,4 +18,13 @@ public class RwlmallApplication {
 		SpringApplication.run(RwlmallApplication.class, args);
 	}
 
+
+
+	@Bean
+	public MultipartConfigElement multipartConfigElement() {
+		MultipartConfigFactory factory = new MultipartConfigFactory();
+		factory.setLocation("/tmp/rwlImage");
+		return factory.createMultipartConfig();
+	}
+
 }

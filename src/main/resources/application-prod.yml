@@ -5,14 +5,14 @@ spring:
     username: root
     password: root
     url: jdbc:mysql://127.0.0.1:3306/rwlmall?useSSL=false&characterEncoding=utf-8
-#spring:
-#  datasource:
-#      url: jdbc:jtds:sqlserver://rm-bp1d1t1do2ty7m1o1do.sqlserver.rds.aliyuncs.com:3433;DatabaseName=rwlmall
-#      username: mhk_qc
-#      password: mhk_qc_1
-#      driver-class-name: net.sourceforge.jtds.jdbc.Driver
-#      hikari:
-#        connection-test-query: SELECT 1
+  #spring:
+  #  datasource:
+  #      url: jdbc:jtds:sqlserver://rm-bp1d1t1do2ty7m1o1do.sqlserver.rds.aliyuncs.com:3433;DatabaseName=rwlmall
+  #      username: mhk_qc
+  #      password: mhk_qc_1
+  #      driver-class-name: net.sourceforge.jtds.jdbc.Driver
+  #      hikari:
+  #        connection-test-query: SELECT 1
   jpa:
     show-sql: false
     hibernate:
@@ -22,30 +22,30 @@ spring:
       fail-on-empty-beans: false
       indent-output: true
   redis:
-      database: 0
-      host: 127.0.0.1
-      password:
-      port: 6379
+    database: 0
+    host: 127.0.0.1
+    password:
+    port: 6379
 
 
 
 #服务器配置
 server:
-  port: 8081
+  port: 8008
 
 #微信配置
 wechat:
-  appId: wx3c6699da59f7cb25
-  appSecret: 283696ca1e6fc9ef739b1b74cea6b3ce
-  mchId: 10024153
-  mchKey: braggadocio345l6ackadaisicalness
-  keyPath: /home/wcp/rwlmall/src/main/resources/static/h5.p12
-  notifyUrl:  https://rtest.rwlai.com/rwlmall/pay/notify
+  appId: wx6facec47c2fca33b
+  appSecret: d889f98ca71b67d8cb821be34a91c98
+#  mchId: 10024153
+#  mchKey: braggadocio345l6ackadaisicalness
+#  keyPath: /home/wcp/rwlmall/src/main/resources/static/h5.p12
+#  notifyUrl:  https://rtest.rwlai.com/rwlmall/pay/notify
 
 
 #微信认证url配置
-redirecturl:  https://rtest.rwlai.com/rwlmall/wechat/userinfo
-authurl:  https://rtest.rwlai.com/rwlmall/wechat/login
+redirecturl:  http://www.embracex.com/rwlmall/wechat/userinfo
+authurl:  http://www.embracex.com/rwlmall/wechat/login
 
 
 ## yml配置日志输出的格式以及日志文件

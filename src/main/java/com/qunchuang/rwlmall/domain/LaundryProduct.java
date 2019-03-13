@@ -50,4 +50,7 @@ public class LaundryProduct extends BaseEntity implements Product {
 
     /*是否自动上架*/
     private boolean autoStatus = false;
+
+
+
 }
