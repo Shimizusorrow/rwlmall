@@ -253,16 +253,16 @@ public class RoleServiceImpl implements RoleService {
     }
 
 
-//    @Override
-//    public void initAdmin() {
-//        Role role = new Role();
-//        role.setPassword(MD5Util.generate("1"));
-//        role.setUsername("admin");
-//        role.setFunctionAuthority("A1,A2,A3,A4,A5,B1,B2,B3,C1,C2,C3,C4,C5,D1,D2,D3,E1,E2,E3,E4,E5");
-//        role.setRoleNumber(1);
-//        role.setRoleAuthority("ROLE_ADMIN");
-//        roleRepository.save(role);
-//    }
+    @Override
+    public void initAdmin() {
+        Role role = new Role();
+        role.setPassword(MD5Util.generate("1"));
+        role.setUsername("admin");
+        role.setFunctionAuthority("A1,A2,A3,A4,A5,B1,B2,B3,C1,C2,C3,C4,C5,D1,D2,D3,E1,E2,E3,E4,E5");
+        role.setRoleNumber(1);
+        role.setRoleAuthority("ROLE_ADMIN");
+        roleRepository.save(role);
+    }
 
     @Override
     public RoleVO getSelfInfo(Principal principal) {

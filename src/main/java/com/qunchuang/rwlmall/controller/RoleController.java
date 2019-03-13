@@ -113,10 +113,10 @@ public class RoleController {
         return roleService.findOne(roleId);
     }
 
-//    @RequestMapping("/initadmin")
-//    public Object initAdmin(){
-//        roleService.initAdmin();
-//        return null;
-//    }
+    @RequestMapping("/initadmin")
+    public Object initAdmin(){
+        roleService.initAdmin();
+        return null;
+    }
 
 }

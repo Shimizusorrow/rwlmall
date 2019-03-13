@@ -47,5 +47,5 @@ public interface  RoleService extends UserDetailsService {
 
     RoleVO getSelfInfo(Principal principal);
 
-//    void initAdmin();
+    void initAdmin();
 }
