@@ -12,9 +12,6 @@ import com.qunchuang.rwlmall.enums.PayModeEnum;
 import com.qunchuang.rwlmall.enums.PayStatusEnum;
 import com.qunchuang.rwlmall.enums.ResultExceptionEnum;
 import com.qunchuang.rwlmall.exception.RwlMallException;
-import com.qunchuang.rwlmall.repository.FurnitureOrderRepository;
-import com.qunchuang.rwlmall.repository.MallOrderRepository;
-import com.qunchuang.rwlmall.repository.OrderRepository;
 import com.qunchuang.rwlmall.service.*;
 import com.qunchuang.rwlmall.utils.AmountUtil;
 import com.qunchuang.rwlmall.utils.CardPayUtil;
@@ -24,8 +21,6 @@ import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Random;
 
 /**
  * @author Curtain
