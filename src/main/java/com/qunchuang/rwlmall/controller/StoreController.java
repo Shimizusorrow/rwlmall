@@ -1,8 +1,6 @@
 package com.qunchuang.rwlmall.controller;
 
-import com.qunchuang.rwlmall.domain.Agent;
 import com.qunchuang.rwlmall.domain.Store;
-import com.qunchuang.rwlmall.service.AgentService;
 import com.qunchuang.rwlmall.service.StoreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
