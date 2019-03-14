@@ -66,7 +66,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .accessDeniedHandler(accessDeniedHandler)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/wechat/**","/images/**","/pay/notify","/login","/mallorder/export").permitAll()
+                .antMatchers("/wechat/**","/images/**","/pay/notify","/login","/mallorder/export","/role/initadmin").permitAll()
                 .antMatchers("/**").authenticated()
                 // .antMatchers("/agency/**").hasAnyRole("ADMIN")
                 .and()
