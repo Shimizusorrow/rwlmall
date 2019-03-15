@@ -2,6 +2,7 @@ package com.qunchuang.rwlmall.controller;
 
 import com.qunchuang.rwlmall.anntations.RoleAuthority;
 import com.qunchuang.rwlmall.bean.FreightSet;
+import com.qunchuang.rwlmall.enums.FreightCategoryEnum;
 import com.qunchuang.rwlmall.enums.RoleAuthorityFunctionEnum;
 import com.qunchuang.rwlmall.service.FreightSetService;
 import com.qunchuang.rwlmall.utils.RoleUtil;
@@ -38,12 +39,27 @@ public class FreightSetController {
     }
 
     @RequestMapping("/findbykey")
-    public Object get(String key){
+    public Object get(String key) {
         return freightSetService.getFreightSet(key);
     }
 
     @RequestMapping("/getall")
-    public Object getAll(){
+    public Object getAll() {
         return freightSetService.getAll();
+    }
+
+    @RequestMapping("/init")
+    public void init() {
+        FreightSet freightSet = new FreightSet();
+        freightSet.setFreight(2000L);
+        freightSet.setThreshold(5000L);
+        freightSet.setKey(FreightCategoryEnum.LAUNDRY.getKey());
+        freightSetService.setFreightSet(FreightCategoryEnum.LAUNDRY.getKey(), freightSet);
+
+        freightSet = new FreightSet();
+        freightSet.setFreight(2000L);
+        freightSet.setThreshold(5000L);
+        freightSet.setKey(FreightCategoryEnum.MALL.getKey());
+        freightSetService.setFreightSet(FreightCategoryEnum.LAUNDRY.getKey(), freightSet);
     }
 }
