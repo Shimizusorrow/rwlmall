@@ -60,6 +60,6 @@ public class FreightSetController {
         freightSet.setFreight(2000L);
         freightSet.setThreshold(5000L);
         freightSet.setKey(FreightCategoryEnum.MALL.getKey());
-        freightSetService.setFreightSet(FreightCategoryEnum.LAUNDRY.getKey(), freightSet);
+        freightSetService.setFreightSet(FreightCategoryEnum.MALL.getKey(), freightSet);
     }
 }
