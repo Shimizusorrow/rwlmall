@@ -35,12 +35,12 @@ server:
 
 #微信配置
 wechat:
-  appId: wx6facec47c2fca33b
-  appSecret: d889f98ca71b67d8cb821be34a91c98
-#  mchId: 10024153
-#  mchKey: braggadocio345l6ackadaisicalness
-#  keyPath: /home/wcp/rwlmall/src/main/resources/static/h5.p12
-#  notifyUrl:  https://rtest.rwlai.com/rwlmall/pay/notify
+  appId: wx3c6699da59f7cb25
+  appSecret: 283696ca1e6fc9ef739b1b74cea6b3ce
+  mchId: 10024153
+  mchKey: braggadocio345l6ackadaisicalness
+  keyPath: /home/wcp/rwlmall/src/main/resources/static/h5.p12
+  notifyUrl:  http://www.embracex.com/rwlmall/pay/notify
 
 
 #微信认证url配置
