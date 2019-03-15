@@ -28,20 +28,31 @@ public class RechargeController {
     /*设置充值奖励*/
     @PostMapping("/setrecharge")
     @RoleAuthority(RoleAuthorityFunctionEnum.RECHARGE)
-    public Object setRecharge(@RequestParam String key, @RequestBody Recharge recharge,Principal principal){
-        rechargeService.setRecharge(key,recharge);
+    public Object setRecharge(@RequestParam String key, @RequestBody Recharge recharge, Principal principal) {
+        rechargeService.setRecharge(key, recharge);
         return null;
     }
 
     /*获取充值奖励列表*/
     @RequestMapping("/getall")
-    public Object getAll(){
+    public Object getAll() {
         return rechargeService.getAll();
     }
 
     /*获取指定充值奖励*/
     @RequestMapping("/getrecharge")
-    Recharge getRecharge(@RequestParam String key){
+    public Recharge getRecharge(@RequestParam String key) {
         return rechargeService.getRecharge(key);
+    }
+
+    @RequestMapping("/init")
+    public void init() {
+        Recharge recharge = new Recharge();
+        for (int i = 1; i < 5; i++) {
+            recharge.setKey("rwlRecharge" + i);
+            recharge.setPayMoney(2000L * i);
+            recharge.setRewardMoney(500L * i);
+            rechargeService.setRecharge("rwlRecharge" + i, recharge);
+        }
     }
 }
