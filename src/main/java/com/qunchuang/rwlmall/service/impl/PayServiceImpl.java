@@ -149,8 +149,9 @@ public class PayServiceImpl implements PayService {
         weChatShare.setNonceStr(RandomUtil.getRandomStr());
 
         String sign = "appId="+weChatShare.getAppid()+"&nonceStr="+weChatShare.getNonceStr()+"&timestamp="+weChatShare.getTimestamp();
-        String signature = DigestUtils.sha1Hex(sign);
-        weChatShare.setSignature(signature);
+        //todo 支付排除
+//        String signature = DigestUtils.sha1Hex(sign);
+//        weChatShare.setSignature(signature);
 
         return weChatShare;
     }
