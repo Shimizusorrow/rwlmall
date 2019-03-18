@@ -43,7 +43,7 @@ public class WeChatController {
 
     @RequestMapping(value = "/authorize")
     private String authorize(String returnUrl) {
-        String redirectUrl = wxMpService.oauth2buildAuthorizationUrl(url, WxConsts.OAUTH2_SCOPE_BASE, returnUrl);
+        String redirectUrl = wxMpService.oauth2buildAuthorizationUrl(url, WxConsts.OAUTH2_SCOPE_USER_INFO, returnUrl);
 
         return "redirect:" + redirectUrl;
     }
