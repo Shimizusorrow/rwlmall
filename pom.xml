@@ -141,13 +141,13 @@
         </dependency>
 
         <!--顺丰sdk中commons需要1.9版本-->
-        <dependency>
-            <groupId>commons-codec-1.9</groupId>
-            <artifactId>commons-codec-1.9</artifactId>
-            <version>1.9</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/src/lib/commons-codec-1.9.jar</systemPath>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>commons-codec-1.9</groupId>-->
+            <!--<artifactId>commons-codec-1.9</artifactId>-->
+            <!--<version>1.9</version>-->
+            <!--<scope>system</scope>-->
+            <!--<systemPath>${project.basedir}/src/lib/commons-codec-1.9.jar</systemPath>-->
+        <!--</dependency>-->
 
         <!--阿里云短信-->
         <dependency>
