@@ -14,6 +14,7 @@ import java.util.List;
  */
 public interface ConsumeRecordRepository extends JpaRepository<ConsumeRecord, String> {
 
+
     Page<ConsumeRecord> findByUserIdAndCreatetimeBetween(String userId, Long startTime, Long endTime, Pageable pageable);
 
     List<ConsumeRecord> findByUserIdAndCreatetimeBetween(String userId, Long startTime, Long endTime, Sort sort);

@@ -67,8 +67,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers("/wechat/**","/images/**","/pay/notify","/login","/mallorder/export","/role/initadmin").permitAll()
-                .antMatchers("/**").permitAll()
+                .antMatchers("/**").authenticated()
                 // .antMatchers("/agency/**").hasAnyRole("ADMIN")
+
                 .and()
                 .formLogin()
                 .loginPage("/login")

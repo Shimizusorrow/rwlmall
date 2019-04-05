@@ -24,7 +24,7 @@ public class OldOrderController {
 
     /*根据商品编号 查询订单*/
     @RequestMapping("/findbynumber")
-    public Object findByNumber(@RequestParam("number") String number) {
+    public Object findByNumber(@RequestParam(name = "number") String number) {
         return oldOrderService.findByNumber(number);
     }
 

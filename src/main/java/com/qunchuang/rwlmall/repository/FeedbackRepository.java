@@ -15,4 +15,5 @@ import org.springframework.stereotype.Repository;
 public interface FeedbackRepository extends JpaRepository<Feedback,String> {
 
     Page<Feedback> findByCreatetimeBetween(Long startTime, Long endTime, Pageable pageable);
+
 }

@@ -50,7 +50,6 @@ public class CoreObject implements ICoreObject,Serializable {
 
     @Override
    final public int hashCode() {
-
         return (this.id==null)?13: Objects.hash(this.id);
     }
 }

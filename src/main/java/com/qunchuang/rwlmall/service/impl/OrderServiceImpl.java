@@ -82,6 +82,8 @@ public class OrderServiceImpl<T> implements OrderService<T> {
     }
 
     @Override
+
+
     public Page<T> findByStatusAndArea(Integer status, String province, String city, String area, Pageable pageable, Principal principal) {
 
         Role role = (Role) ((UsernamePasswordAuthenticationToken) principal).getPrincipal();

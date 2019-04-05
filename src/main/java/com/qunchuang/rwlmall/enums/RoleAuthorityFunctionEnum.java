@@ -54,6 +54,7 @@ public enum  RoleAuthorityFunctionEnum {
     PLATFORM_TEXT("E4"),
     /*运费设置*/
     FREIGHT_SET("E5"),
+
     /*代理商账号管理*/
     AGENT_MANGER("E6")
     ;

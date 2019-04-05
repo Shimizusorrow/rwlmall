@@ -31,7 +31,8 @@ public class MyAuthenticationSuccessHandler
 
     boolean isFromOAuth2=false;
 
-    final String PRESCRIPT="function GetQueryString(name){var reg = new RegExp('(^|&)'+ name +'=([^&]*)(&|$)');var r = window.location.search.substr(1).match(reg);if(r!=null)return unescape(r[2]); return null;}\n"
+    final String PRESCRIPT="function GetQueryString(name){var reg =" +
+            " new RegExp('(^|&)'+ name +'=([^&]*)(&|$)');var r = window.location.search.substr(1).match(reg);if(r!=null)return unescape(r[2]); return null;}\n"
     +"this.localStorage.setItem('x-auth-token','$token$');window.location.href=GetQueryString('state')";
 
     @Override

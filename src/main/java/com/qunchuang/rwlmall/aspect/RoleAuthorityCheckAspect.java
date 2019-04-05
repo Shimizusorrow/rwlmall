@@ -20,6 +20,7 @@ import java.util.Optional;
 public class RoleAuthorityCheckAspect {
 
     @Pointcut("execution(public * com.qunchuang.rwlmall.controller.*.*(..)) " +
+            //@annotation 表示对另外一个条件进行AOP处理
             " && @annotation(roleAuthority)")
 
     public void init(RoleAuthority roleAuthority) {

@@ -3,7 +3,7 @@ spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     username: root
-    password: 123456
+    password: root
     url: jdbc:mysql://127.0.0.1:3306/rwlmall?useSSL=false
   jpa:
     show-sql: true
@@ -74,7 +74,7 @@ authurl: http://rtest.rwlai.cn/rwlmall/rwlmall/wechat/login
 #图片路径配置
 qiniuimageurl: https://rtest.rwlai.com/
 imagepath: U:\images\
-imageurl: http://127.0.0.1/rwlmall/images/
+imageurl: http://192.168.249.79/rwlmall/images/
 excelpath: U:\excel\
 
 #云测Testin短信服务
